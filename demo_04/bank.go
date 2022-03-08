@@ -55,12 +55,12 @@ func (ca ChequingAccount) Balance(tr TransactionReader) (int, error) {
 	return balance, nil
 }
 
-func (ca ChequingAccount) BalanceCAD(url string, tr TransactionReader) (int, error) {
+func (ca ChequingAccount) BalanceCAD(baseURL string, tr TransactionReader) (int, error) {
 	balance, _ := ca.Balance(tr)
-	if url == "" {
-		url = "https://api.exchangerate-api.com/v4/latest/usd"
+	if baseURL == "" {
+		baseURL = "https://api.exchangerate-api.com/v4"
 	}
-	res, err := http.Get(url)
+	res, err := http.Get(baseURL + "/latest/usd")
 	if err != nil {
 		return 0, err
 	}
