@@ -39,7 +39,7 @@ func TestReadBalance(t *testing.T) {
 	}
 
 	if balance < 100 {
-		t.Fatal(fmt.Sprintf("expected balance 100, got %v", balance))
+		t.Fatalf("expected balance 100, got %v", balance)
 	}
 }
 

@@ -70,6 +70,7 @@ func (ca ChequingAccount) Withdraw(amount int, tm TransactionManger) error {
 	if err != nil {
 		return errors.New("failed to get balance for update")
 	}
+	// not thread safe
 	if amount > balance {
 		return errors.New("amount greated than balance")
 	}

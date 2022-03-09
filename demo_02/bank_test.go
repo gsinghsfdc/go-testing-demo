@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"testing"
 )
 
@@ -66,7 +65,7 @@ func TestReadBalance(t *testing.T) {
 	}
 
 	if balance != 100 {
-		t.Fatal(fmt.Sprintf("expected balance 100, got %v", balance))
+		t.Fatalf("expected balance 100, got %v", balance)
 	}
 }
 
@@ -77,7 +76,7 @@ func TestDeposit(t *testing.T) {
 	err := account.Deposit(100, tm)
 
 	if err != nil {
-		t.Fatal(fmt.Sprintf("expected no error on deposit, got %v", err))
+		t.Fatalf("expected no error on deposit, got %v", err)
 	}
 }
 
