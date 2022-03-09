@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-func TestFibRecursive(t *testing.T) {
-	tests := map[int]int{
+var (
+	basicCases = map[int]int{
 		0:  0,
 		1:  1,
 		2:  1,
@@ -15,7 +15,11 @@ func TestFibRecursive(t *testing.T) {
 		5:  5,
 		10: 55,
 	}
-	for i, v := range tests {
+	benchCases = []int{1, 10, 40}
+)
+
+func TestFibRecursive(t *testing.T) {
+	for i, v := range basicCases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			if f := FibRecursive(i); f != v {
 				t.Fatalf("FibRecursive(%v) == %v : expected %v", i, f, v)
@@ -25,16 +29,7 @@ func TestFibRecursive(t *testing.T) {
 }
 
 func TestFibCache(t *testing.T) {
-	tests := map[int]int{
-		0:  0,
-		1:  1,
-		2:  1,
-		3:  2,
-		4:  3,
-		5:  5,
-		10: 55,
-	}
-	for i, v := range tests {
+	for i, v := range basicCases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			if f := FibCache(i); f != v {
 				t.Fatalf("FibCache(%v) == %v : expected %v", i, f, v)
@@ -44,8 +39,7 @@ func TestFibCache(t *testing.T) {
 }
 
 func BenchmarkFibRecursive(b *testing.B) {
-	ts := []int{1, 10, 40}
-	for _, t := range ts {
+	for _, t := range benchCases {
 		tc := func(b *testing.B) {
 			for n := 0; n < b.N; n++ {
 				FibRecursive(t)
@@ -56,8 +50,7 @@ func BenchmarkFibRecursive(b *testing.B) {
 }
 
 func BenchmarkFibCache(b *testing.B) {
-	ts := []int{1, 10, 40}
-	for _, t := range ts {
+	for _, t := range benchCases {
 		tc := func(b *testing.B) {
 			for n := 0; n < b.N; n++ {
 				FibCache(t)
