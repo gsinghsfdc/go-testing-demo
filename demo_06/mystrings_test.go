@@ -1,6 +1,7 @@
 package mystrings
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -8,6 +9,11 @@ import (
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
 )
+
+func Example() {
+	fmt.Printf("Created By: %v, and %v", Upper("Gurvinder"), Lower("Kenny"))
+	// Output: Created By: GURVINDER, and kenny
+}
 
 func TestLower(t *testing.T) {
 	ts := map[string]string{
